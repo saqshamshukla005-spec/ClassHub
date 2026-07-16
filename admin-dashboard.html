@@ -1,94 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CR-DC Admin Dashboard | ClassHub</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
 background:#f4f7fc;
 }
 
-.admin-dashboard{
-padding:40px;
+header{
+background:#0d6efd;
+color:white;
+padding:20px;
+text-align:center;
 }
 
-.admin-dashboard h2{
-text-align:center;
-color:#0d6efd;
-margin-bottom:30px;
+.dashboard{
+padding:30px;
 }
 
 .grid{
-
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:20px;
-
+margin-top:30px;
 }
 
 .card{
-
 background:white;
 padding:30px;
 border-radius:12px;
 text-align:center;
 box-shadow:0 5px 15px rgba(0,0,0,.12);
 transition:.3s;
-
+cursor:pointer;
 }
 
 .card:hover{
-
 transform:translateY(-5px);
-
 }
 
 .card a{
-
 text-decoration:none;
 color:#333;
-
 }
 
 .icon{
-
-font-size:40px;
-
+font-size:45px;
+margin-bottom:15px;
 }
 
 .logout{
-
 text-align:center;
 margin-top:40px;
-
 }
 
 .logout button{
-
+padding:12px 25px;
 background:red;
 color:white;
 border:none;
-padding:12px 25px;
 border-radius:8px;
 cursor:pointer;
-
+font-size:16px;
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -96,121 +89,61 @@ cursor:pointer;
 
 </header>
 
+<div class="dashboard">
 
-
-<div class="admin-dashboard">
-
-
-<h2>Welcome CR-DC Admin</h2>
-
-
+<h2 align="center">Welcome Admin</h2>
 
 <div class="grid">
 
-
 <div class="card">
-
 <a href="manage-notices.html">
-
 <div class="icon">📢</div>
-
 <h3>Manage Notices</h3>
-
 </a>
-
 </div>
 
-
-
 <div class="card">
-
 <a href="manage-notes.html">
-
 <div class="icon">📚</div>
-
 <h3>Manage Notes</h3>
-
 </a>
-
 </div>
 
-
-
 <div class="card">
-
 <a href="manage-events.html">
-
 <div class="icon">📅</div>
-
 <h3>Manage Events</h3>
-
 </a>
-
 </div>
 
-
-
 <div class="card">
-
 <a href="manage-students.html">
-
 <div class="icon">👨‍🎓</div>
-
 <h3>Students</h3>
-
 </a>
-
 </div>
 
-
-
 <div class="card">
-
 <a href="manage-teachers.html">
-
 <div class="icon">👨‍🏫</div>
-
 <h3>Teachers</h3>
-
 </a>
-
 </div>
-
-
 
 <div class="card">
-
 <a href="admin-settings.html">
-
 <div class="icon">⚙️</div>
-
 <h3>Settings</h3>
-
 </a>
-
 </div>
 
-
-
 </div>
-
-
 
 <div class="logout">
-
-<button onclick="logout()">
-
-Logout
-
-</button>
-
+<button onclick="logout()">Logout</button>
 </div>
 
-
-
 </div>
-
-
 
 <script>
 
@@ -224,7 +157,5 @@ window.location.href="admin-login.html";
 
 </script>
 
-
 </body>
-
 </html>
