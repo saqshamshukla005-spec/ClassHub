@@ -32,13 +32,6 @@ color:#0d6efd;
 
 }
 
-.date{
-
-color:#666;
-font-weight:bold;
-
-}
-
 </style>
 
 </head>
@@ -54,51 +47,78 @@ font-weight:bold;
 </header>
 
 
-
 <div class="event-box">
-
 
 <h2>Upcoming Events</h2>
 
+<div id="eventList"></div>
 
+
+</div>
+
+
+
+<script>
+
+
+function loadEvents(){
+
+
+let events = JSON.parse(localStorage.getItem("events")) || [];
+
+
+let list=document.getElementById("eventList");
+
+
+list.innerHTML="";
+
+
+if(events.length==0){
+
+list.innerHTML=`
 
 <div class="event-card">
 
-<h3>Technical Fest</h3>
-
-<p class="date">📅 Date: Coming Soon</p>
-
-<p>College technical activities, projects and competitions.</p>
+<p>No events available.</p>
 
 </div>
 
+`;
 
+return;
+
+}
+
+
+
+events.forEach(e=>{
+
+
+list.innerHTML += `
 
 <div class="event-card">
 
-<h3>Sports Meet</h3>
+<h3>${e.title}</h3>
 
-<p class="date">📅 Date: Coming Soon</p>
+<p>📅 ${e.date}</p>
 
-<p>Annual sports competition for students.</p>
-
-</div>
-
-
-
-<div class="event-card">
-
-<h3>Freshers Party</h3>
-
-<p class="date">📅 Date: Coming Soon</p>
-
-<p>Welcome event for new students.</p>
+<p>${e.description}</p>
 
 </div>
 
+`;
+
+});
 
 
-</div>
+}
+
+
+
+loadEvents();
+
+
+</script>
 
 
 </body>
