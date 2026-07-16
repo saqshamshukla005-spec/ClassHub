@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.dashboard{
+padding:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+transition:.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🎓 Student Dashboard</h1>
+
+</header>
+
+<div class="dashboard">
+
+<h2>Welcome Student</h2>
+
+<div class="grid">
+
+<div class="card">
+📚<br><br>
+Notes
+</div>
+
+<div class="card">
+📅<br><br>
+Timetable
+</div>
+
+<div class="card">
+📢<br><br>
+Notices
+</div>
+
+<div class="card">
+🎉<br><br>
+Events
+</div>
+
+<div class="card">
+📊<br><br>
+Attendance
+</div>
+
+<div class="card">
+📝<br><br>
+Results
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
