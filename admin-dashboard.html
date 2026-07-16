@@ -138,7 +138,7 @@ cursor:pointer;
 
 <div class="card">
 
-<a href="#">
+<a href="manage-events.html">
 
 <div class="icon">📅</div>
 
@@ -152,7 +152,7 @@ cursor:pointer;
 
 <div class="card">
 
-<a href="#">
+<a href="manage-students.html">
 
 <div class="icon">👨‍🎓</div>
 
@@ -166,7 +166,7 @@ cursor:pointer;
 
 <div class="card">
 
-<a href="#">
+<a href="manage-teachers.html">
 
 <div class="icon">👨‍🏫</div>
 
@@ -180,7 +180,7 @@ cursor:pointer;
 
 <div class="card">
 
-<a href="manage-events.html">
+<a href="admin-settings.html">
 
 <div class="icon">⚙️</div>
 
@@ -195,6 +195,7 @@ cursor:pointer;
 </div>
 
 
+
 <div class="logout">
 
 <button onclick="logout()">
@@ -206,6 +207,7 @@ Logout
 </div>
 
 
+
 </div>
 
 
@@ -214,12 +216,13 @@ Logout
 
 function logout(){
 
+localStorage.removeItem("admin");
+
 window.location.href="admin-login.html";
 
 }
 
 </script>
-
 
 
 </body>
