@@ -1,29 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    alert("Welcome to ClassHub 🎉");
+    console.log("ClassHub Loaded");
 
-    const buttons = document.querySelectorAll("button");
+    const studentBtn = document.querySelector("a[href='student-login.html']");
+    const adminBtn = document.querySelector("a[href='admin-login.html']");
 
-    buttons.forEach(button => {
-
-        button.addEventListener("click", function () {
-
-            const text = this.innerText;
-
-            if (text.includes("Student")) {
-                alert("Student Login page will be available soon.");
-            }
-
-            else if (text.includes("Teacher")) {
-                alert("Teacher Login page will be available soon.");
-            }
-
-            else {
-                alert("CR-DC / Admin Login page will be available soon.");
-            }
-
+    if(studentBtn){
+        studentBtn.addEventListener("click", function(){
+            console.log("Student Login Opened");
         });
+    }
 
-    });
+    if(adminBtn){
+        adminBtn.addEventListener("click", function(){
+            console.log("CR-DC/Admin Login Opened");
+        });
+    }
 
 });
