@@ -3,19 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Login - ClassHub</title>
+<title>Student Login | ClassHub</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
+body{
+background:#f4f7fc;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
 .login-box{
-width:350px;
-margin:80px auto;
-background:white;
+width:380px;
+background:#fff;
 padding:30px;
 border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+box-shadow:0 5px 15px rgba(0,0,0,.15);
 text-align:center;
+}
+
+.login-box h1{
+color:#0d6efd;
+margin-bottom:10px;
+}
+
+.login-box p{
+margin-bottom:20px;
 }
 
 .login-box input{
@@ -30,16 +46,16 @@ font-size:16px;
 .login-box button{
 width:100%;
 padding:12px;
-background:#1565C0;
-color:white;
+background:#0d6efd;
+color:#fff;
 border:none;
 border-radius:8px;
-font-size:16px;
+font-size:17px;
 cursor:pointer;
 }
 
 .login-box button:hover{
-background:#0d47a1;
+background:#084298;
 }
 </style>
 
@@ -49,7 +65,7 @@ background:#0d47a1;
 
 <div class="login-box">
 
-<h2>🎓 Student Login</h2>
+<h1>🎓 Student Login</h1>
 
 <p>Enter your Student ID</p>
 
@@ -59,9 +75,7 @@ id="studentId"
 placeholder="Student ID">
 
 <button onclick="loginStudent()">
-
 Login
-
 </button>
 
 </div>
@@ -70,26 +84,23 @@ Login
 
 function loginStudent(){
 
-let id=document.getElementById("studentId").value;
+let id=document.getElementById("studentId").value.trim();
 
 if(id==""){
 
-alert("Please enter Student ID");
+alert("Please enter your Student ID");
+
+return;
 
 }
 
-else{
+localStorage.setItem("studentId",id);
 
-alert("Welcome Student : "+id);
-
-// Dashboard baad me connect karenge
-
-}
+window.location.href="student-dashboard.html";
 
 }
 
 </script>
 
 </body>
-
 </html>
