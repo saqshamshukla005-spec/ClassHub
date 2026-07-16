@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Students | ClassHub</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>👨‍🎓 Manage Students</h1>
+
+</header>
+
+
+<div class="notice-admin">
+
+
+<h2>Add Student</h2>
+
+
+<input id="name" type="text" placeholder="Student Name">
+
+<input id="id" type="text" placeholder="Student ID">
+
+<input id="course" type="text" placeholder="Course">
+
+
+<button onclick="addStudent()">
+
+Add Student
+
+</button>
+
+
+
+<h2>Student List</h2>
+
+
+<div id="studentList"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+function addStudent(){
+
+
+let name=document.getElementById("name").value;
+
+let id=document.getElementById("id").value;
+
+let course=document.getElementById("course").value;
+
+
+
+if(name=="" || id==""){
+
+alert("Please fill details");
+
+return;
+
+}
+
+
+
+let students=JSON.parse(localStorage.getItem("students")) || [];
+
+
+
+students.push({
+
+name:name,
+
+id:id,
+
+course:course
+
+});
+
+
+
+localStorage.setItem("students",JSON.stringify(students));
+
+
+alert("Student Added");
+
+
+showStudents();
+
+
+}
+
+
+
+function showStudents(){
+
+
+let students=JSON.parse(localStorage.getItem("students")) || [];
+
+let list=document.getElementById("studentList");
+
+
+list.innerHTML="";
+
+
+
+students.forEach(s=>{
+
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>${s.name}</h3>
+
+<p>ID: ${s.id}</p>
+
+<p>${s.course}</p>
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+
+showStudents();
+
+
+
+</script>
+
+
+</body>
+
+</html>
