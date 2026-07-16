@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manage Notices | ClassHub</title>
+<title>Manage Notes | ClassHub</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,27 +16,30 @@
 
 <header>
 
-<h1>📢 Manage Notices</h1>
+<h1>📚 Manage Notes</h1>
 
 </header>
 
 
 <div class="notice-admin">
 
-<h2>Add New Notice</h2>
+<h2>Add New Note</h2>
 
-<input id="title" type="text" placeholder="Notice Title">
+<input id="subject" type="text" placeholder="Subject Name">
 
-<textarea id="message" rows="5" placeholder="Write Notice"></textarea>
+<input id="title" type="text" placeholder="Note Title">
 
-<button onclick="addNotice()">
-Add Notice
+<input id="link" type="text" placeholder="PDF Link">
+
+
+<button onclick="addNote()">
+Add Note
 </button>
 
 
-<h2>Added Notices</h2>
+<h2>Available Notes</h2>
 
-<div id="noticeList"></div>
+<div id="noteList"></div>
 
 
 </div>
@@ -45,14 +48,16 @@ Add Notice
 
 <script>
 
-function addNotice(){
+function addNote(){
+
+let subject=document.getElementById("subject").value;
 
 let title=document.getElementById("title").value;
 
-let message=document.getElementById("message").value;
+let link=document.getElementById("link").value;
 
 
-if(title=="" || message==""){
+if(subject=="" || title==""){
 
 alert("Please fill all details");
 
@@ -61,60 +66,61 @@ return;
 }
 
 
-let notices=JSON.parse(localStorage.getItem("notices")) || [];
+let notes=JSON.parse(localStorage.getItem("notes")) || [];
 
 
-notices.push({
+notes.push({
+
+subject:subject,
 
 title:title,
 
-message:message
+link:link
 
 });
 
 
-localStorage.setItem("notices",JSON.stringify(notices));
+localStorage.setItem("notes",JSON.stringify(notes));
 
 
-alert("Notice Added Successfully");
+alert("Note Added Successfully");
 
 
-document.getElementById("title").value="";
-
-document.getElementById("message").value="";
-
-
-showNotices();
+showNotes();
 
 }
 
 
 
-function showNotices(){
+function showNotes(){
 
-let notices=JSON.parse(localStorage.getItem("notices")) || [];
+let notes=JSON.parse(localStorage.getItem("notes")) || [];
 
-let list=document.getElementById("noticeList");
-
+let list=document.getElementById("noteList");
 
 list.innerHTML="";
 
 
-notices.forEach(n=>{
+notes.forEach(n=>{
 
 
 list.innerHTML += `
 
 <div class="card">
 
-<h3>${n.title}</h3>
+<h3>${n.subject}</h3>
 
-<p>${n.message}</p>
+<p>${n.title}</p>
+
+<a href="${n.link}" target="_blank">
+
+Open Note
+
+</a>
 
 </div>
 
 `;
-
 
 });
 
@@ -122,7 +128,7 @@ list.innerHTML += `
 }
 
 
-showNotices();
+showNotes();
 
 
 </script>
