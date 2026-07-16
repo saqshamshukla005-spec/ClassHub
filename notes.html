@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,14 +17,23 @@ padding:40px;
 }
 
 .note-card{
+
 background:white;
 padding:25px;
 margin:20px 0;
 border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,.12);
+box-shadow:0 5px 15px rgba(0,0,1,.12);
+
+}
+
+.note-card h3{
+
+color:#0d6efd;
+
 }
 
 .note-card a{
+
 display:inline-block;
 margin-top:10px;
 background:#0d6efd;
@@ -31,13 +41,16 @@ color:white;
 padding:10px 20px;
 border-radius:6px;
 text-decoration:none;
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -46,45 +59,87 @@ text-decoration:none;
 </header>
 
 
+
 <div class="notes-box">
+
 
 <h2>Available Notes</h2>
 
 
+<div id="noteList"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+function loadNotes(){
+
+
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+
+let list=document.getElementById("noteList");
+
+
+list.innerHTML="";
+
+
+if(notes.length==0){
+
+list.innerHTML=`
+
 <div class="note-card">
 
-<h3>Computer Science</h3>
-
-<p>Programming, Database and Computer Fundamentals Notes</p>
-
-<a href="#">Download</a>
+<p>No notes available.</p>
 
 </div>
 
+`;
+
+return;
+
+}
+
+
+
+notes.forEach(n=>{
+
+
+list.innerHTML += `
 
 <div class="note-card">
 
-<h3>Mathematics</h3>
+<h3>${n.subject}</h3>
 
-<p>Important formulas and study material</p>
-
-<a href="#">Download</a>
-
-</div>
+<p>${n.title}</p>
 
 
-<div class="note-card">
+<a href="${n.link}" target="_blank">
 
-<h3>Electronics</h3>
+Open Note
 
-<p>Digital Electronics and Basic Electronics Notes</p>
-
-<a href="#">Download</a>
-
-</div>
+</a>
 
 
 </div>
+
+`;
+
+});
+
+
+}
+
+
+loadNotes();
+
+
+</script>
+
 
 
 </body>
