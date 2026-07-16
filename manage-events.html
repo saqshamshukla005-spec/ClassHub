@@ -1,157 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Manage Events | ClassHub</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fc;
+margin:0;
+}
+
+header{
+background:#0d6efd;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+background:#0d6efd;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.event{
+background:#eef4ff;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+}
+</style>
 
 </head>
 
 <body>
 
 <header>
-
 <h1>📅 Manage Events</h1>
-
 </header>
 
+<div class="container">
 
-<div class="notice-admin">
+<input id="title" placeholder="Event Name">
 
+<input id="date" type="date">
 
-<h2>Add New Event</h2>
-
-
-<input id="title" type="text" placeholder="Event Name">
-
-
-<input id="date" type="text" placeholder="Event Date">
-
-
-<textarea id="description" rows="5" placeholder="Event Description"></textarea>
-
+<textarea id="description" placeholder="Description"></textarea>
 
 <button onclick="addEvent()">
-
 Add Event
-
 </button>
 
-
-
-<h2>Available Events</h2>
-
+<hr>
 
 <div id="eventList"></div>
 
-
 </div>
-
-
 
 <script>
 
+let events=JSON.parse(localStorage.getItem("events"))||[];
+
+function load(){
+
+let html="";
+
+events.forEach((e,i)=>{
+
+html+=`
+<div class="event">
+<h3>${e.title}</h3>
+<p>📅 ${e.date}</p>
+<p>${e.description}</p>
+<button onclick="removeEvent(${i})">Delete</button>
+</div>
+`;
+
+});
+
+document.getElementById("eventList").innerHTML=html;
+
+}
 
 function addEvent(){
 
-
 let title=document.getElementById("title").value;
-
 let date=document.getElementById("date").value;
-
 let description=document.getElementById("description").value;
 
+if(title==""||date==""){
 
-
-if(title=="" || date==""){
-
-alert("Please fill all details");
+alert("Fill all fields");
 
 return;
 
 }
 
+events.unshift({
 
-
-let events=JSON.parse(localStorage.getItem("events")) || [];
-
-
-
-events.push({
-
-title:title,
-
-date:date,
-
-description:description
+title,
+date,
+description
 
 });
-
-
 
 localStorage.setItem("events",JSON.stringify(events));
 
-
-
-alert("Event Added Successfully");
-
-
-
-showEvents();
-
+load();
 
 }
 
+function removeEvent(i){
 
+events.splice(i,1);
 
-function showEvents(){
+localStorage.setItem("events",JSON.stringify(events));
 
-
-let events=JSON.parse(localStorage.getItem("events")) || [];
-
-let list=document.getElementById("eventList");
-
-
-list.innerHTML="";
-
-
-
-events.forEach(e=>{
-
-
-list.innerHTML += `
-
-<div class="card">
-
-<h3>${e.title}</h3>
-
-<p>📅 ${e.date}</p>
-
-<p>${e.description}</p>
-
-</div>
-
-`;
-
-});
-
+load();
 
 }
 
-
-
-showEvents();
-
-
+load();
 
 </script>
 
-
 </body>
-
 </html>
