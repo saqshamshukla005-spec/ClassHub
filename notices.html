@@ -1,106 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Notices | ClassHub</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
 
-.notice-box{
-padding:40px;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f7fc;
 }
 
-.notice-card{
-
-background:white;
+header{
+background:#0d6efd;
+color:white;
 padding:20px;
-margin:15px 0;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:25px;
 border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,.12);
-
 }
 
-.notice-card h3{
+.notice{
+background:#eef4ff;
+padding:15px;
+margin:15px 0;
+border-radius:10px;
+border-left:5px solid #0d6efd;
+}
 
+.notice h3{
+margin:0;
 color:#0d6efd;
+}
 
+.notice p{
+margin-top:10px;
+line-height:1.6;
+}
+
+.empty{
+text-align:center;
+padding:40px;
+color:gray;
+font-size:18px;
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
-<h1>📢 ClassHub Notices</h1>
+<h1>📢 Class Notices</h1>
 
 </header>
 
-
-
-<div class="notice-box">
+<div class="container">
 
 <h2>Latest Notices</h2>
 
-
 <div id="noticeList"></div>
 
-
 </div>
-
-
 
 <script>
 
-
-function loadNotices(){
-
-
 let notices = JSON.parse(localStorage.getItem("notices")) || [];
 
-
-let list = document.getElementById("noticeList");
-
-
-list.innerHTML="";
-
+let html = "";
 
 if(notices.length==0){
 
+html = "<div class='empty'>No Notices Available</div>";
 
-list.innerHTML = `
-
-<div class="notice-card">
-
-<p>No notices available.</p>
-
-</div>
-
-`;
-
-
-return;
-
-}
-
-
+}else{
 
 notices.forEach(n=>{
 
+html += `
 
-list.innerHTML += `
-
-<div class="notice-card">
+<div class="notice">
 
 <h3>${n.title}</h3>
 
@@ -110,21 +102,13 @@ list.innerHTML += `
 
 `;
 
-
 });
-
 
 }
 
-
-
-loadNotices();
-
-
+document.getElementById("noticeList").innerHTML = html;
 
 </script>
 
-
 </body>
-
 </html>
