@@ -1,14 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Manage Notes | ClassHub</title>
+<title>Manage Notices | ClassHub</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f7fc;
+}
+
+header{
+background:#0d6efd;
+color:#fff;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:#fff;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+background:#0d6efd;
+color:#fff;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#084298;
+}
+
+.notice{
+background:#eef4ff;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+}
+
+.delete{
+background:red;
+margin-top:10px;
+}
+
+</style>
 
 </head>
 
@@ -16,107 +74,69 @@
 
 <header>
 
-<h1>📚 Manage Notes</h1>
+<h1>📢 Manage Notices</h1>
 
 </header>
 
+<div class="container">
 
-<div class="notice-admin">
+<h2>Add Notice</h2>
 
-<h2>Add New Note</h2>
+<input
+type="text"
+id="title"
+placeholder="Notice Title">
 
-<input id="subject" type="text" placeholder="Subject Name">
+<textarea
+id="message"
+rows="5"
+placeholder="Notice Description"></textarea>
 
-<input id="title" type="text" placeholder="Note Title">
+<button onclick="addNotice()">
 
-<input id="link" type="text" placeholder="PDF Link">
+Add Notice
 
-
-<button onclick="addNote()">
-Add Note
 </button>
 
+<hr>
 
-<h2>Available Notes</h2>
+<h2>All Notices</h2>
 
-<div id="noteList"></div>
-
+<div id="noticeList"></div>
 
 </div>
 
-
-
 <script>
 
-function addNote(){
+let notices=JSON.parse(localStorage.getItem("notices"))||[];
 
-let subject=document.getElementById("subject").value;
+function showNotices(){
 
-let title=document.getElementById("title").value;
+let html="";
 
-let link=document.getElementById("link").value;
+if(notices.length===0){
 
-
-if(subject=="" || title==""){
-
-alert("Please fill all details");
-
-return;
+html="<p>No Notice Available.</p>";
 
 }
 
+else{
 
-let notes=JSON.parse(localStorage.getItem("notes")) || [];
+notices.forEach((n,index)=>{
 
+html+=`
 
-notes.push({
+<div class="notice">
 
-subject:subject,
+<h3>${n.title}</h3>
 
-title:title,
+<p>${n.message}</p>
 
-link:link
+<button class="delete" onclick="deleteNotice(${index})">
 
-});
+Delete
 
-
-localStorage.setItem("notes",JSON.stringify(notes));
-
-
-alert("Note Added Successfully");
-
-
-showNotes();
-
-}
-
-
-
-function showNotes(){
-
-let notes=JSON.parse(localStorage.getItem("notes")) || [];
-
-let list=document.getElementById("noteList");
-
-list.innerHTML="";
-
-
-notes.forEach(n=>{
-
-
-list.innerHTML += `
-
-<div class="card">
-
-<h3>${n.subject}</h3>
-
-<p>${n.title}</p>
-
-<a href="${n.link}" target="_blank">
-
-Open Note
-
-</a>
+</button>
 
 </div>
 
@@ -124,16 +144,57 @@ Open Note
 
 });
 
+}
+
+document.getElementById("noticeList").innerHTML=html;
 
 }
 
+function addNotice(){
 
-showNotes();
+let title=document.getElementById("title").value.trim();
 
+let message=document.getElementById("message").value.trim();
+
+if(title===""||message===""){
+
+alert("Fill all fields");
+
+return;
+
+}
+
+notices.unshift({
+
+title:title,
+
+message:message
+
+});
+
+localStorage.setItem("notices",JSON.stringify(notices));
+
+document.getElementById("title").value="";
+
+document.getElementById("message").value="";
+
+showNotices();
+
+}
+
+function deleteNotice(index){
+
+notices.splice(index,1);
+
+localStorage.setItem("notices",JSON.stringify(notices));
+
+showNotices();
+
+}
+
+showNotices();
 
 </script>
 
-
 </body>
-
 </html>
