@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Events | ClassHub</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📅 Manage Events</h1>
+
+</header>
+
+
+<div class="notice-admin">
+
+
+<h2>Add New Event</h2>
+
+
+<input id="title" type="text" placeholder="Event Name">
+
+
+<input id="date" type="text" placeholder="Event Date">
+
+
+<textarea id="description" rows="5" placeholder="Event Description"></textarea>
+
+
+<button onclick="addEvent()">
+
+Add Event
+
+</button>
+
+
+
+<h2>Available Events</h2>
+
+
+<div id="eventList"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+function addEvent(){
+
+
+let title=document.getElementById("title").value;
+
+let date=document.getElementById("date").value;
+
+let description=document.getElementById("description").value;
+
+
+
+if(title=="" || date==""){
+
+alert("Please fill all details");
+
+return;
+
+}
+
+
+
+let events=JSON.parse(localStorage.getItem("events")) || [];
+
+
+
+events.push({
+
+title:title,
+
+date:date,
+
+description:description
+
+});
+
+
+
+localStorage.setItem("events",JSON.stringify(events));
+
+
+
+alert("Event Added Successfully");
+
+
+
+showEvents();
+
+
+}
+
+
+
+function showEvents(){
+
+
+let events=JSON.parse(localStorage.getItem("events")) || [];
+
+let list=document.getElementById("eventList");
+
+
+list.innerHTML="";
+
+
+
+events.forEach(e=>{
+
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>${e.title}</h3>
+
+<p>📅 ${e.date}</p>
+
+<p>${e.description}</p>
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+
+showEvents();
+
+
+
+</script>
+
+
+</body>
+
+</html>
