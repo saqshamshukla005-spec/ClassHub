@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CR-DC Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.dashboard{
+padding:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.box{
+background:white;
+padding:30px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+cursor:pointer;
+transition:.3s;
+}
+
+.box:hover{
+transform:translateY(-5px);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>👔 CR-DC Dashboard</h1>
+
+</header>
+
+<div class="dashboard">
+
+<h2>Welcome CR-DC / Admin</h2>
+
+<div class="grid">
+
+<div class="box">
+📢
+<br><br>
+Manage Notices
+</div>
+
+<div class="box">
+📚
+<br><br>
+Upload Notes
+</div>
+
+<div class="box">
+📅
+<br><br>
+Manage Events
+</div>
+
+<div class="box">
+👨‍🎓
+<br><br>
+Students
+</div>
+
+<div class="box">
+👨‍🏫
+<br><br>
+Teachers
+</div>
+
+<div class="box">
+⚙️
+<br><br>
+Settings
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
