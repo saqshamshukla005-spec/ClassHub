@@ -3,13 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Notes</title>
+<title>Manage Notes | ClassHub</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fc;
+margin:0;
+}
+
+header{
+background:#0d6efd;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+background:#0d6efd;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#084298;
+}
+
+.note{
+background:#eef4ff;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+}
+</style>
+
 </head>
 <body>
 
+<header>
 <h1>📚 Manage Notes</h1>
+</header>
 
-<p>Manage Notes page is working.</p>
+<div class="container">
+
+<h2>Add New Note</h2>
+
+<input type="text" id="subject" placeholder="Subject Name">
+
+<input type="text" id="title" placeholder="Note Title">
+
+<input type="text" id="link" placeholder="PDF Link">
+
+<button onclick="addNote()">Add Note</button>
+
+<hr>
+
+<h2>Available Notes</h2>
+
+<div id="notesList"></div>
+
+</div>
+
+<script>
+
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function showNotes(){
+
+let html="";
+
+notes.forEach((note,index)=>{
+
+html+=`
+<div class="note">
+<h3>${note.subject}</h3>
+<p>${note.title}</p>
+<a href="${note.link}" target="_blank">📄 Open PDF</a>
+<br><br>
+<button onclick="deleteNote(${index})">Delete</button>
+</div>
+`;
+
+});
+
+document.getElementById("notesList").innerHTML=html;
+
+}
+
+function addNote(){
+
+let subject=document.getElementById("subject").value;
+let title=document.getElementById("title").value;
+let link=document.getElementById("link").value;
+
+if(subject==""||title==""||link==""){
+
+alert("Please fill all fields");
+
+return;
+
+}
+
+notes.push({
+subject,
+title,
+link
+});
+
+localStorage.setItem("notes",JSON.stringify(notes));
+
+showNotes();
+
+document.getElementById("subject").value="";
+document.getElementById("title").value="";
+document.getElementById("link").value="";
+
+}
+
+function deleteNote(index){
+
+notes.splice(index,1);
+
+localStorage.setItem("notes",JSON.stringify(notes));
+
+showNotes();
+
+}
+
+showNotes();
+
+</script>
 
 </body>
 </html>
